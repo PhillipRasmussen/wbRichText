@@ -30,6 +30,8 @@
 	<cfproperty name="ftTemplateSnippetWebskinPrefix" required="false" default="insertSnippet" hint="The webskin prefix used to insert content template snippets." />
 	<cfproperty name="ftTemplateWebskinPrefixList" required="false" default="insertHTML" hint="The webskin prefix used to insert content." />
 	<cfproperty name="ftPasteDataImages" required="false" default="true" hint="Allow Images to be pasted into the editor." />
+	<cfproperty name="ftBlobImagesToJPG" required="false" default="true" hint="Forces Pasted images to jpg" />
+	<cfproperty name="ftBlobImagesWidth" required="false" default="800" hint="Max width of a blob image." />
 
 
 	<cffunction name="init" access="public" returntype="farcry.core.packages.formtools.richtext" output="false" hint="Returns a copy of this initialised object">
@@ -218,11 +220,15 @@
 				<cfloop from="1" to="#arraylen(aMatches)#" index="i">
 
 					<cfset myImage = ImageReadBase64(aMatches[i][2].value)>
+					<cfif arguments.stMetadata.ftBlobImagesToJPG>
 					<!--- for simplicity sake, we're going to convert all images to jpg --->
 					<cfset cleanName = "#createUUID()#.jpg">
+					<cfelse>
+					<cfset cleanName = "#createUUID()#.#aMatches[i][3].value#">
+					</cfif>
 					<!--- resize if over 800px wide --->
-					<cfif myImage.width GT 800>
-						<cfset ImageResize(myImage, 800, "")>
+					<cfif myImage.width GT arguments.stMetadata.ftBlobImagesWidth>
+						<cfset ImageResize(myImage, arguments.stMetadata.ftBlobImagesWidth, "")>
 					</cfif>
 					<!--- create image in tmp space --->
 					<cfimage source="#myImage#" destination="#expandPath('/')#images/richtext/#cleanName#" action="write" quality=".8">
@@ -255,7 +261,7 @@
 
 			</cfif>
 
-		<cflog file="wbRichText" text="#stResult.value#">
+		
 		<cfset arguments.stFieldPost.Value = stResult.value>
 
 		<!--- --------------------------- --->
