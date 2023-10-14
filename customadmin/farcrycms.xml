@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webtop>
+	<section mergeType="merge" id="content">
+		<subsection id="mediacategories" mergeType="merge">
+			<menu id="medialibrarycontent" mergeType="merge">
+				<menuitem id="richtextimages" sequence="50" label="Adhock Images" typename="wbRichTextImage" />
+				
+			</menu>
+			
+		</subsection>
+	</section>
+</webtop>
