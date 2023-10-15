@@ -1,4 +1,5 @@
 # wbRichText Plugin
+This will override the richtexteditor in the core Farcry CMS
 * Updated to tinymce 4.9.4 version 
 * Drag and drop image integration (creates an adhock image on save)
 * Image editor (again creates a new adhock image on save)
