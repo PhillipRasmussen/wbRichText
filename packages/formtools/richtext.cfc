@@ -74,7 +74,7 @@
 		</cfif>
 
 		<cfif not len(arguments.stMetadata.ftContentCSS)>
-			<cfset arguments.stMetadata.ftContentCSS = "/assets/css/zuma.css,/assets/vendor/bootstrap/bootstrap.min.css" />
+			<cfset arguments.stMetadata.ftContentCSS = "/farcry/plugins/wbRichText/www/bootstrap/bootstrap.min.css" />
 		</cfif>
 
 		<skin:loadJS id="fc-jquery" />
